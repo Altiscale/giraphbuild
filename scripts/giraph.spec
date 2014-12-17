@@ -99,9 +99,9 @@ echo "ok - building giraph"
 if [ -f /etc/alti-maven-settings/settings.xml ] ; then
   echo "ok - applying local maven repo settings.xml for first priority"
   if [[ $GIRAPH_HADOOP_VERSION == 2.2.* ]] ; then
-    mvn -U -X -Phadoop_yarn --settings /etc/alti-maven-settings/settings.xml --global-settings /etc/alti-maven-settings/settings.xml -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests package
+    mvn -U -X -Phadoop_yarn --settings /etc/alti-maven-settings/settings.xml --global-settings /etc/alti-maven-settings/settings.xml -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests compile
   elif [[ $GIRAPH_HADOOP_VERSION == 2.4.* ]] ; then
-    mvn -U -X -Phadoop_yarn --settings /etc/alti-maven-settings/settings.xml --global-settings /etc/alti-maven-settings/settings.xml -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests package
+    mvn -U -X -Phadoop_yarn --settings /etc/alti-maven-settings/settings.xml --global-settings /etc/alti-maven-settings/settings.xml -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests compile
   else
     echo "fatal - Unrecognize hadoop version $GIRAPH_HADOOP_VERSION, can't continue, exiting, no cleanup"
     exit -9
@@ -109,9 +109,9 @@ if [ -f /etc/alti-maven-settings/settings.xml ] ; then
 else
   echo "ok - applying default repository form pom.xml"
   if [[ $GIRAPH_HADOOP_VERSION == 2.2.* ]] ; then
-    mvn -U -X -Phadoop_yarn -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests package
+    mvn -U -X -Phadoop_yarn -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests compile
   elif [[ $GIRAPH_HADOOP_VERSION == 2.4.* ]] ; then
-    mvn -U -X -Phadoop_yarn  -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests package
+    mvn -U -X -Phadoop_yarn -Dhadoop.version=$GIRAPH_HADOOP_VERSION -Dyarn.version=$GIRAPH_HADOOP_VERSION -Dhive.version=$GIRAPH_HIVE_VERSION -DskipTests compile
   else
     echo "fatal - Unrecognize hadoop version $GIRAPH_HADOOP_VERSION, can't continue, exiting, no cleanup"
     exit -9
