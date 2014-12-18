@@ -1,10 +1,11 @@
 %global apache_name            GIRAPH_USER
-%global giraph_uid             GIRAPH_UID
-%global giraph_gid             GIRAPH_GID
+#%global giraph_uid             GIRAPH_UID
+#%global giraph_gid             GIRAPH_GID
 
 %define altiscale_release_ver  ALTISCALE_RELEASE
 %define rpm_package_name       alti-giraph
 %define giraph_version         GIRAPH_VERSION_REPLACE
+%define giraph_plain_version   GIRAPH_PLAINVERSION_REPLACE
 %define hadoop_version         HADOOP_VERSION_REPLACE
 %define hive_version           HIVE_VERSION_REPLACE
 %define build_service_name     alti-giraph
@@ -17,19 +18,26 @@
 %define build_release          BUILD_TIME
 
 Name: %{rpm_package_name}-%{giraph_version}
-Summary: %{giraph_folder_name} RPM Installer AE-927, cluster mode restricted with warnings
+Summary: %{giraph_folder_name} RPM Installer AE-927
 Version: %{giraph_version}
 Release: %{altiscale_release_ver}.%{build_release}%{?dist}
 License: ASL 2.0
 Group: Development/Libraries
 Source: %{_sourcedir}/%{build_service_name}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{release}-root-%{build_service_name}
+BuildArch: noarch
 Requires(pre): shadow-utils
 # Requires: %{rpm_package_name}-%{giraph_version}-test
+# Requires: hadoop-client, zookeeper
 BuildRequires: apache-maven >= 3.2.1
 BuildRequires: jdk >= 1.7.0.51
 Url: http://giraph.apache.org/
 %description
+Giraph is a BSP inspired graph processing platform that runs on Hadoop.
+Giraph implements a graph processing platform to run large scale algorithms 
+(such as page rank, shared connections, personalization-based popularity, etc.) on top of Hadoop infrastructure. 
+Giraph builds upon the graph-oriented nature of Pregel but additionally adds fault-tolerance to the 
+coordinator process with the use of ZooKeeper as its centralized coordination service.
 Build from https://github.com/Altiscale/giraph/tree/altiscale-release-1.1 with 
 build script https://github.com/Altiscale/giraphbuild/tree/altiscale-release-1.1 
 Origin source form https://github.com/apache/giraph/tree/release-1.1
@@ -135,14 +143,10 @@ echo "test install giraph label giraph_folder_name = %{giraph_folder_name}"
 %{__mkdir} -p %{buildroot}%{install_giraph_logs}
 %{__mkdir} -p %{buildroot}%{install_giraph_test}
 # copy all necessary jars
+cp -rp %{_builddir}/%{build_service_name}/giraph-dist/target/giraph-%{giraph_plain_version}-for-hadoop-%{hadoop_version}-bin/giraph-%{giraph_plain_version}-for-hadoop-%{hadoop_version}/* %{buildroot}/%{install_giraph_dest}
 
 # test deploy the config folder
 cp -rp %{_builddir}/%{build_service_name}/conf %{buildroot}/%{install_giraph_conf}
-
-# Inherit license, readme, etc
-cp -p %{_builddir}/%{build_service_name}/README.md %{buildroot}/%{install_giraph_dest}
-cp -p %{_builddir}/%{build_service_name}/LICENSE %{buildroot}/%{install_giraph_dest}
-cp -p %{_builddir}/%{build_service_name}/NOTICE %{buildroot}/%{install_giraph_dest}
 
 # deploy test suite and scripts
 cp -rp %{_builddir}/%{build_service_name}/test_giraph/* %{buildroot}/%{install_giraph_test}

@@ -131,6 +131,7 @@ fi
 
 echo "ok - applying version number $GIRAPH_VERSION and release number $BUILD_TIME, the pattern delimiter is / here"
 sed -i "s/GIRAPH_VERSION_REPLACE/$GIRAPH_VERSION/g" "$WORKSPACE/rpmbuild/SPECS/giraph.spec"
+sed -i "s/GIRAPH_PLAINVERSION_REPLACE/$GIRAPH_PLAINVERSION/g" "$WORKSPACE/rpmbuild/SPECS/giraph.spec"
 sed -i "s/HADOOP_VERSION_REPLACE/$HADOOP_VERSION/g" "$WORKSPACE/rpmbuild/SPECS/giraph.spec"
 sed -i "s/HIVE_VERSION_REPLACE/$HIVE_VERSION/g" "$WORKSPACE/rpmbuild/SPECS/giraph.spec"
 sed -i "s/GIRAPH_USER/$GIRAPH_USER/g" "$WORKSPACE/rpmbuild/SPECS/giraph.spec"

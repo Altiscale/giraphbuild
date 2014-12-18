@@ -31,14 +31,11 @@ export PATH=$PATH:$M2_HOME/bin:$SCALA_HOME/bin:$ANT_HOME/bin:$JAVA_HOME/bin
 if [ "x${GIRAPH_USER}" = "x" ] ; then
   export GIRAPH_USER=giraph
 fi
-if [ "x${GIRAPH_GID}" = "x" ] ; then
-  export GIRAPH_GID=411460017
-fi
-if [ "x${GIRAPH_UID}" = "x" ] ; then
-  export GIRAPH_UID=411460024
-fi
 if [ "x${GIRAPH_VERSION}" = "x" ] ; then
   export GIRAPH_VERSION=1.1.0
+fi
+if [ "x${GIRAPH_PLAINVERSION}" = "x" ] ; then
+  export GIRAPH_PLAINVERSION=$GIRAPH_VERSION
 fi
 
 if [ "x${HADOOP_VERSION}" = "x2.2.0" ] ; then
