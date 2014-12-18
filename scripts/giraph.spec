@@ -54,14 +54,14 @@ The test directory to test Giraph libraries after installing giraph.
 %pre
 # Soft creation for giraph user if it doesn't exist. This behavior is idempotence to Chef deployment.
 # Should be harmless. MAKE SURE UID and GID is correct FIRST!!!!!!
-getent group %{apache_name} >/dev/null || groupadd -f -g %{giraph_gid} -r %{apache_name}
-if ! getent passwd %{apache_name} >/dev/null ; then
-    if ! getent passwd %{giraph_uid} >/dev/null ; then
-      useradd -r -u %{giraph_uid} -g %{apache_name} -c "Soft creation of user and group of giraph for manual deployment" %{apache_name}
-    else
-      useradd -r -g %{apache_name} -c "Soft adding user giraph to group giraph for manual deployment" %{apache_name}
-    fi
-fi
+#getent group %{apache_name} >/dev/null || groupadd -f -g %{giraph_gid} -r %{apache_name}
+#if ! getent passwd %{apache_name} >/dev/null ; then
+#    if ! getent passwd %{giraph_uid} >/dev/null ; then
+#      useradd -r -u %{giraph_uid} -g %{apache_name} -c "Soft creation of user and group of giraph for manual deployment" %{apache_name}
+#    else
+#      useradd -r -g %{apache_name} -c "Soft adding user giraph to group giraph for manual deployment" %{apache_name}
+#    fi
+#fi
 
 %prep
 # copying files into BUILD/giraph/ e.g. BUILD/giraph/* 
